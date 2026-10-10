@@ -2,13 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
-  plugins: [TanStackRouterVite(), react(), tsConfigPaths()],
+  plugins: [TanStackRouterVite(), react(), legacy({ targets: ["defaults"] }), tsConfigPaths()],
   server: {
     middlewareMode: false,
   },
   build: {
-    target: "es2020",
+    target: "esnext",
   },
 });
