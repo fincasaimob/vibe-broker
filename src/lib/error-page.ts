@@ -1,82 +1,30 @@
 export function renderErrorPage(): string {
-  return `
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Erro - Vibe Broker</title>
-        <style>
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-          }
-
-          .error-container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-          }
-
-          .error-code {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ff9800;
-            margin-bottom: 1rem;
-          }
-
-          .error-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-          }
-
-          .error-message {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-          }
-
-          .error-link {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.75rem 2rem;
-            background-color: #ff9800;
-            color: #1a1a1a;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
-          }
-
-          .error-link:hover {
-            background-color: #ffb74d;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="error-container">
-          <div class="error-code">500</div>
-          <h1 class="error-title">Erro no Servidor</h1>
-          <p class="error-message">
-            Desculpe, algo deu errado no nosso servidor.
-            <br />
-            Por favor, tente novamente em alguns momentos.
-          </p>
-          <a href="/" class="error-link">Voltar ao Início</a>
-        </div>
-      </body>
-    </html>
-  `;
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>This page didn't load</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { font: 15px/1.5 system-ui, -apple-system, sans-serif; background: #fafafa; color: #111; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 1.5rem; }
+      .card { max-width: 28rem; width: 100%; text-align: center; padding: 2rem; }
+      h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+      p { color: #4b5563; margin: 0 0 1.5rem; }
+      .actions { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+      a, button { padding: 0.5rem 1rem; border-radius: 0.375rem; font: inherit; cursor: pointer; text-decoration: none; border: 1px solid transparent; }
+      .primary { background: #111; color: #fff; }
+      .secondary { background: #fff; color: #111; border-color: #d1d5db; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>This page didn't load</h1>
+      <p>Something went wrong on our end. You can try refreshing or head back home.</p>
+      <div class="actions">
+        <button class="primary" onclick="location.reload()">Try again</button>
+        <a class="secondary" href="/">Go home</a>
+      </div>
+    </div>
+  </body>
+</html>`;
 }

@@ -1,50 +1,31 @@
-import "./styles.css";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { Router, RouterProvider } from "@tanstack/react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { routeTree } from "./routeTree.gen";
+import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5,
-      gcTime: 1000 * 60 * 10,
-    },
-  },
-});
+import { renderErrorPage } from "./lib/error-page";
+import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
-const router = new Router({
-  routeTree,
-  context: {
-    queryClient,
-  },
-  defaultPreload: "intent",
-  defaultPreloadDelay: 50,
-});
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
+const errorMiddleware = createMiddleware().server(async ({ next }) => {
+  try {
+    return await next();
+  } catch (error) {
+    if (error != null && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
+    console.error(error);
+    return new Response(renderErrorPage(), {
+      status: 500,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
   }
-}
+});
 
-const rootElement = document.getElementById("root");
+// Start installs this automatically when src/start.ts is absent; defining the
+// file opts out, so re-add it explicitly to keep server functions protected
+// from cross-site requests.
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === "serverFn",
+});
 
-if (!rootElement) {
-  throw new Error("Root element not found");
-}
-
-const root = ReactDOM.createRoot(rootElement);
-
-root.render(
-  React.createElement(
-    React.StrictMode,
-    null,
-    React.createElement(
-      QueryClientProvider,
-      { client: queryClient },
-      React.createElement(RouterProvider, { router })
-    )
-  )
-);
+export const startInstance = createStart(() => ({
+  functionMiddleware: [attachSupabaseAuth],
+  requestMiddleware: [errorMiddleware, csrfMiddleware],
+}));

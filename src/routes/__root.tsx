@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode, Suspense } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -120,22 +120,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Suspense fallback={<LoadingFallback />}>
-        <Outlet />
-      </Suspense>
+      <Outlet />
     </QueryClientProvider>
-  );
-}
-
-function LoadingFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-        </div>
-        <p className="text-sm text-muted-foreground">Carregando...</p>
-      </div>
-    </div>
   );
 }

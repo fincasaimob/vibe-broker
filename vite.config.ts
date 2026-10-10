@@ -1,16 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tsConfigPaths from "vite-tsconfig-paths";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-import legacy from "@vitejs/plugin-legacy";
-import tailwindcss from "@tailwindcss/vite";
+// Same config as the Lovable project, plus the Vercel Nitro preset.
+// The Lovable wrapper defaults to the cloudflare-module preset; Vercel needs "vercel".
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  plugins: [TanStackRouterVite(), react(), tailwindcss(), legacy({ targets: ["defaults"] }), tsConfigPaths()],
-  server: {
-    middlewareMode: false,
+  tanstackStart: {
+    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+    server: { entry: "server" },
   },
-  build: {
-    target: "esnext",
-  },
+  nitro: { preset: "vercel" },
 });

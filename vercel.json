@@ -1,12 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
-  "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
-  },
-  "regions": ["sfo1"]
+  "buildCommand": "npm run build"
 }
