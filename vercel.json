@@ -1,0 +1,24 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "env": {
+    "SUPABASE_URL": "@SUPABASE_URL",
+    "SUPABASE_PUBLISHABLE_KEY": "@SUPABASE_PUBLISHABLE_KEY",
+    "ADMIN_PASSWORD": "@ADMIN_PASSWORD",
+    "ADMIN_SESSION_SECRET": "@ADMIN_SESSION_SECRET",
+    "DATABASE_URL": "@DATABASE_URL"
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "regions": ["sfo1"],
+  "functions": {
+    "src/**/*.server.ts": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
