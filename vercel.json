@@ -8,10 +8,5 @@
       "main": true
     }
   },
-  "regions": ["sfo1"],
-  "functions": {
-    "src/**/*.server.ts": {
-      "runtime": "nodejs@20.x"
-    }
-  }
+  "regions": ["sfo1"]
 }
