@@ -1,6 +1,7 @@
+import "./styles.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Router } from "@tanstack/react-router";
+import { Router, RouterProvider } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeTree } from "./routeTree.gen";
 
@@ -43,7 +44,7 @@ root.render(
     React.createElement(
       QueryClientProvider,
       { client: queryClient },
-      React.createElement(Router, { router })
+      React.createElement(RouterProvider, { router })
     )
   )
 );
