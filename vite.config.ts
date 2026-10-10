@@ -8,4 +8,7 @@ export default defineConfig({
   server: {
     middlewareMode: false,
   },
+  build: {
+    target: "es2020",
+  },
 });
