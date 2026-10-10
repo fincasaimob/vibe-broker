@@ -11,7 +11,7 @@
   "regions": ["sfo1"],
   "functions": {
     "src/**/*.server.ts": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs@20.x"
     }
   }
 }
