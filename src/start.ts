@@ -29,3 +29,5 @@ export const startInstance = createStart(() => ({
   functionMiddleware: [attachSupabaseAuth],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
+
+// Webhook deployment trigger - 2026-10-10 14:50 UTC-3
