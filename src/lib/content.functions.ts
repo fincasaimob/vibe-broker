@@ -22,13 +22,66 @@ function publicClient() {
   });
 }
 
+const mockPartners: Partner[] = [
+  {
+    id: "1",
+    name: "MRV Engenharia",
+    logo_url: null,
+    cities: ["São Paulo", "Campinas"],
+    focus: "Empreendimentos residenciais de médio a alto padrão",
+  },
+  {
+    id: "2",
+    name: "Plano&Plano",
+    logo_url: null,
+    cities: ["São Paulo"],
+    focus: "Projetos inovadores com design diferenciado",
+  },
+  {
+    id: "3",
+    name: "Cury Construtora",
+    logo_url: null,
+    cities: ["Campinas", "Rio Claro"],
+    focus: "Construção de qualidade com valores acessíveis",
+  },
+];
+
+const mockPosts: Post[] = [
+  {
+    id: "1",
+    url: "https://instagram.com/vibe.broker",
+    title: "Como calcular sua capacidade real de compra",
+    tag: "Educação",
+    image_url: null,
+  },
+  {
+    id: "2",
+    url: "https://instagram.com/vibe.broker",
+    title: "MCMV: seus direitos e como aproveitar melhor",
+    tag: "Dicas",
+    image_url: null,
+  },
+];
+
 export const getSiteContent = createServerFn({ method: "GET" }).handler(async () => {
-  const sb = publicClient();
-  const [p, a] = await Promise.all([
-    sb.from("partners").select("id,name,logo_url,cities,focus").order("created_at"),
-    sb.from("instagram_posts").select("id,url,title,tag,image_url").order("created_at"),
-  ]);
-  return { partners: (p.data ?? []) as Partner[], posts: (a.data ?? []) as Post[] };
+  // If env vars are not defined, return mock data for testing
+  if (!process.env["SUPABASE_URL"] || !process.env["SUPABASE_PUBLISHABLE_KEY"]) {
+    console.warn("[getSiteContent] Using mock data - Supabase not configured");
+    return { partners: mockPartners, posts: mockPosts };
+  }
+
+  try {
+    const sb = publicClient();
+    const [p, a] = await Promise.all([
+      sb.from("partners").select("id,name,logo_url,cities,focus").order("created_at"),
+      sb.from("instagram_posts").select("id,url,title,tag,image_url").order("created_at"),
+    ]);
+    return { partners: (p.data ?? []) as Partner[], posts: (a.data ?? []) as Post[] };
+  } catch (error) {
+    console.error("[getSiteContent] Error fetching from Supabase:", error);
+    // Fall back to mock data on error
+    return { partners: mockPartners, posts: mockPosts };
+  }
 });
 
 // ---- Admin session (signed token, verified on every write) ----
