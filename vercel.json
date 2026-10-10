@@ -3,12 +3,6 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
-  "env": {
-    "SUPABASE_URL": "@supabase_url",
-    "SUPABASE_PUBLISHABLE_KEY": "@supabase_publishable_key",
-    "ADMIN_PASSWORD": "@admin_password",
-    "ADMIN_SESSION_SECRET": "@admin_session_secret"
-  },
   "git": {
     "deploymentEnabled": {
       "main": true
