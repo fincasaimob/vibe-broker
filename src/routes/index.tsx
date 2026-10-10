@@ -24,7 +24,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import heroImage from "@/assets/vibe-hero.jpg";
 import logoLockup from "@/assets/vibe-logo-lockup.png.asset.json";
 import logoFull from "@/assets/vibe-logo-full.png.asset.json";
 import symbol from "@/assets/vibe-symbol.png.asset.json";
@@ -93,7 +92,7 @@ function Index() {
       </header>
 
       <section id="inicio" className="relative min-h-[760px] bg-primary text-primary-foreground">
-        <img src={heroImage} alt="Edifícios residenciais contemporâneos iluminados pelo entardecer" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover object-center" />
+        <img src={symbol.url} alt="" aria-hidden="true" width={956} height={825} className="pointer-events-none absolute right-[-6%] top-1/2 h-[60%] w-auto -translate-y-1/2 object-contain opacity-90 md:right-[4%] md:h-[66%]" />
         <div className="hero-shade absolute inset-0" />
         <div className="section-shell relative z-10 flex min-h-[760px] items-end pb-16 pt-32 md:items-center md:pb-0">
           <div className="reveal max-w-2xl">
