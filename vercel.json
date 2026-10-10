@@ -16,6 +16,7 @@
     }
   },
   "regions": ["sfo1"],
+  "deploymentType": "git",
   "functions": {
     "src/**/*.server.ts": {
       "runtime": "nodejs20.x"
